@@ -21,6 +21,8 @@ namespace Web
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddApplicationInsightsTelemetry();
+
             services.AddControllersWithViews();
 
             services.AddSingleton<IReportHandler, ReportHandler>();
@@ -37,7 +39,7 @@ namespace Web
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
-
+            
             app.UseStatusCodePages();
             app.UseRouting();
 
