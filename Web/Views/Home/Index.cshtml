@@ -1,0 +1,70 @@
+﻿@using Web.Models
+
+@model HomeViewModel
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div>
+    @if (ViewData.ModelState.ErrorCount > 0)
+    {
+        @Html.ValidationSummary()
+    }
+
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <br/>
+        <div>
+            @Html.TextBoxFor(m => m.Report, new { type = "file", required = "required" })
+        </div>
+        <br/>
+        <div>
+            <button type="submit" title="Generate">Generate</button>
+        </div>
+        <br />
+    }
+
+    @if (Model.Invoices?.Count > 0)
+    {
+        foreach (var person in Model.Invoices)
+        {
+            <section>
+                @{
+                    var id = $"chk-{Guid.NewGuid()}";
+                }
+                <div>
+                    <h2>
+                        <label for="@id">@person.Key <small>(click to show)</small></label>
+                    </h2>
+                </div>
+                <input type="checkbox" class="toggler" id="@id" />
+
+                @foreach (var year in person.Value)
+                {
+                    @foreach (var month in year.Value)
+                    {
+                        <table>
+                            <caption>
+                                <h3>@month.Key @year.Key</h3></caption>
+                            <tbody>
+                            <tr>
+                                <th>Project</th>
+                                <th>Total hours</th>
+                            </tr>
+                            @foreach (var project in month.Value)
+                            {
+                                <tr>
+                                    <td>@project.Key</td>
+                                    <td>@project.Value</td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    }
+                }
+            </section>
+        }
+    }
+</div>
