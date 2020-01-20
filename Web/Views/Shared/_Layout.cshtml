@@ -24,22 +24,22 @@
             flex-shrink: 0;
         }
 
-        table {
+        .toggle {
+            display: none;
+        }
+        .toggle + .toggleable {
+            display: none;
+        }
+        .toggle:checked + .toggleable {
+            display: table;
+        }
+
+        .toggleable {
             margin-left: auto;
             margin-right: auto;
         }
-        table td:first-child {
+        .toggleable table td:first-child {
             text-align: left;
-        }
-
-        input.toggler {
-            display: none;
-        }
-        input.toggler + table {
-            display: none;
-        }
-        input.toggler:checked + table {
-            display: table;
         }
 
         .validation-summary-errors {

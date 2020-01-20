@@ -34,36 +34,36 @@
                 @{
                     var id = $"chk-{Guid.NewGuid()}";
                 }
-                <div>
-                    <h2>
-                        <label for="@id">@person.Key <small>(click to show)</small></label>
-                    </h2>
-                </div>
-                <input type="checkbox" class="toggler" id="@id" />
-
-                @foreach (var year in person.Value)
-                {
-                    @foreach (var month in year.Value)
+                <h2>
+                    <label for="@id">@person.Key <small>(click to show)</small></label>
+                </h2>
+                <input type="checkbox" class="toggle" id="@id" />
+                <div class="toggleable">
+                    @foreach (var year in person.Value)
                     {
-                        <table>
-                            <caption>
-                                <h3>@month.Key @year.Key</h3></caption>
-                            <tbody>
-                            <tr>
-                                <th>Project</th>
-                                <th>Total hours</th>
-                            </tr>
-                            @foreach (var project in month.Value)
-                            {
+                        @foreach (var month in year.Value)
+                        {
+                            <table>
+                                <caption>
+                                    <h3>@month.Key @year.Key</h3>
+                                </caption>
+                                <tbody>
                                 <tr>
-                                    <td>@project.Key</td>
-                                    <td>@project.Value</td>
+                                    <th>Project</th>
+                                    <th>Total hours</th>
                                 </tr>
-                            }
-                            </tbody>
-                        </table>
+                                @foreach (var project in month.Value)
+                                {
+                                    <tr>
+                                        <td>@project.Key</td>
+                                        <td>@project.Value</td>
+                                    </tr>
+                                }
+                                </tbody>
+                            </table>
+                        }
                     }
-                }
+                </div>
             </section>
         }
     }
