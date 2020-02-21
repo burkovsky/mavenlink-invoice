@@ -50,7 +50,7 @@
                                 <tbody>
                                 <tr>
                                     <th>Project</th>
-                                    <th>Total hours</th>
+                                    <th>Total</th>
                                 </tr>
                                 @foreach (var project in month.Value)
                                 {
@@ -59,6 +59,10 @@
                                         <td>@project.Value</td>
                                     </tr>
                                 }
+                                <tr>
+                                    <td>TOTAL</td>
+                                    <td>@month.Value.Values.Sum()</td>
+                                </tr>
                                 </tbody>
                             </table>
                         }
