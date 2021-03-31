@@ -37,7 +37,14 @@ namespace Web.Controllers
                 }
                 else
                 {
-                    model.Invoices = _reportHandler.ProcessReport(model.Report).ToInvoices();
+                    model.Invoices = _reportHandler
+                        .ProcessReport(model.Report, out string message)
+                        .ToInvoices();
+
+                    if (!string.IsNullOrWhiteSpace(message))
+                    {
+                        ModelState.AddModelError(nameof(model.Report), message);
+                    }
                 }
             }
 

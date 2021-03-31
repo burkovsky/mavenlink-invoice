@@ -20,6 +20,8 @@ namespace Abstractions
 
         float Hours { get; }
 
+        string Role { get; }
+
         int Minutes { get; }
     }
 }

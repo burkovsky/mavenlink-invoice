@@ -15,11 +15,11 @@
     @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
-        <br/>
+        <br />
         <div>
             @Html.TextBoxFor(m => m.Report, new { type = "file", required = "required" })
         </div>
-        <br/>
+        <br />
         <div>
             <button type="submit" title="Generate">Generate</button>
         </div>
@@ -48,21 +48,21 @@
                                     <h3>@month.Key @year.Key</h3>
                                 </caption>
                                 <tbody>
-                                <tr>
-                                    <th>Project</th>
-                                    <th>Total</th>
-                                </tr>
-                                @foreach (var project in month.Value)
-                                {
                                     <tr>
-                                        <td>@project.Key</td>
-                                        <td>@project.Value</td>
+                                        <th>Project</th>
+                                        <th>Total</th>
                                     </tr>
-                                }
-                                <tr>
-                                    <td>TOTAL</td>
-                                    <td>@month.Value.Values.Sum()</td>
-                                </tr>
+                                    @foreach (var project in month.Value)
+                                    {
+                                        <tr>
+                                            <td>@project.Key</td>
+                                            <td>@project.Value</td>
+                                        </tr>
+                                    }
+                                    <tr>
+                                        <td>TOTAL</td>
+                                        <td>@month.Value.Values.Sum()</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         }

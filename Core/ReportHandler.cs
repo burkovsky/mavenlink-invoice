@@ -14,8 +14,10 @@ namespace Core
 {
     public class ReportHandler : IReportHandler
     {
-        public IReadOnlyList<ITimeEntry> ProcessReport(IFormFile file)
+        public IReadOnlyList<ITimeEntry> ProcessReport(IFormFile file, out string message)
         {
+            message = string.Empty;
+
             if (file == null || file.Length == 0)
             {
                 return Array.Empty<ITimeEntry>();
@@ -31,9 +33,9 @@ namespace Core
                 {
                     entries = csv.GetRecords<TimeEntry>().ToList();
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-                    // ignored
+                    message = e.Message;
                 }
             }
 
